@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscribe to My YouTube Channel</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background-color 0.5s ease-in-out;
+      color: #fff;
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: white;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      width: 90%;
+      max-width: 450px;
+      transition: transform 0.5s ease-in-out;
+      color: #333;
+    }
+
+    .dark-mode .modal-content {
+      background-color: #333;
+      color: white;
+    }
+
+    .modal h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #333;
+    }
+
+    .dark-mode .modal h2 {
+      color: white;
+    }
+
+    .modal button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #FF0000;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .modal button:hover {
+      background-color: #cc0000;
+      transform: scale(1.05);
+    }
+
+    /* Loader animation */
+    .loader {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #007bff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+      display: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Main content button styles */
+    #nextPageBtn, #nextPageBtn2, #nextPageBtn3, #nextPageBtn4 {
+      padding: 16px 32px;
+      font-size: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      opacity: 0.5;
+      pointer-events: none;
+      margin: 10px;
+      display: none;
+    }
+
+    #nextPageBtn.enabled,
+    #nextPageBtn2.enabled,
+    #nextPageBtn3.enabled,
+    #nextPageBtn4.enabled {
+      opacity: 1;
+      pointer-events: all;
+      display: inline-block;
+    }
+
+    #nextPageBtn:hover, #nextPageBtn2:hover, #nextPageBtn3:hover, #nextPageBtn4:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    /* Animation for modal */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-content {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- The Modal -->
+  <div id="subscribeModal" class="modal">
+    <div class="modal-content">
+      <h2>Subscribe to My YouTube Channel</h2>
+      <button id="openYT" onclick="openYoutube()">Subscribe Now 🎉</button>
+      <div class="checking-msg" id="checkingMsg" style="display: none;">🎉 Checking if you're subscribed... 🎉</div>
+      <div class="loader" id="loader"></div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div style="text-align: center;">
+    <button id="nextPageBtn" onclick="redirectToPage('index2.html')">Khan Sir Website Part 1🚀</button>
+    <button id="nextPageBtn2" onclick="redirectToPage('index3.html')">Khan Sir Website Part 2🚀</button>
+    <button id="nextPageBtn3" onclick="redirectToPage('index4.html')">Khan Sir Website Part 3🚀</button>
+    <button id="nextPageBtn4" onclick="redirectToPage('index5.html')">Khan Sir Website Part 4🚀</button>
+  </div>
+
+  <script>
+    // Check if the modal has been shown before
+    window.onload = function() {
+      if (!localStorage.getItem('modalShown')) {
+        document.getElementById('subscribeModal').style.display = 'flex';
+      } else {
+        enableButtons();
+      }
+    };
+
+    // Function to open YouTube channel and show checking message
+    function openYoutube() {
+      // Open YouTube link in new tab
+      window.open('https://youtube.com/@lbsnaa226?si=1NzPOz1WO2M3UiyG', '_blank');
+
+      // Show "Checking if you're subscribed..." message and loader
+      document.getElementById('openYT').style.display = 'none';
+      document.getElementById('checkingMsg').style.display = 'block';
+      document.getElementById('loader').style.display = 'block';
+
+      // Simulate checking process with loader
+      setTimeout(function() {
+        document.getElementById('subscribeModal').style.display = 'none';
+        enableButtons();
+        // Set flag in localStorage to indicate the modal has been shown
+        localStorage.setItem('modalShown', 'true');
+      }, 6000); // 6 seconds to simulate the check
+    }
+
+    // Function to enable all buttons
+    function enableButtons() {
+      document.getElementById('nextPageBtn').classList.add('enabled');
+      document.getElementById('nextPageBtn2').classList.add('enabled');
+      document.getElementById('nextPageBtn3').classList.add('enabled');
+      document.getElementById('nextPageBtn4').classList.add('enabled');
+    }
+
+    // Function to redirect to the next page
+    function redirectToPage(pageUrl) {
+      // Check if buttons are enabled before redirecting
+      if (document.querySelector('.enabled')) {
+        window.location.href = pageUrl;
+      }
+    }
+  </script>
+
+</body>
+</html>
